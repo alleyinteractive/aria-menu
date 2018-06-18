@@ -1,0 +1,25 @@
+{
+  "name": "aria-menu",
+  "version": "1.0.0",
+  "description": "Makes site navigation menubars accessible following W3C design patterns.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alleyinteractive/aria-menu.git"
+  },
+  "keywords": [
+    "aria",
+    "menubar",
+    "accessibility",
+    "w3c"
+  ],
+  "author": "Alley Interactive",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/alleyinteractive/aria-menu/issues"
+  },
+  "homepage": "https://github.com/alleyinteractive/aria-menu#readme"
+}
