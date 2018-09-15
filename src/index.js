@@ -9,7 +9,7 @@ export default class AriaMenu {
     const msgPrefix = 'Menubar constructor argument menubarNode ';
 
     // Check whether menubarNode is a DOM element
-    if (!(domNode instanceof Element)) {
+    if (! (domNode instanceof Element)) {
       throw new TypeError(`${msgPrefix}is not a DOM Element.`);
     }
 
@@ -29,7 +29,6 @@ export default class AriaMenu {
     }
 
     this.isMenubar = true;
-
     this.domNode = domNode;
 
     this.menubarItems = []; // See Menubar init method
@@ -90,11 +89,11 @@ export default class AriaMenu {
     const item = newItem;
 
     this.menubarItems.forEach((el) => {
-      flag = 0 === el.domNode.tabIndex &&
-        'true' === el.domNode.getAttribute('aria-expanded');
+      flag = 0 === el.domNode.tabIndex
+        && 'true' === el.domNode.getAttribute('aria-expanded');
 
       const activeEl = el;
-      activeEl.domNode.tabIndex = -1;
+      activeEl.domNode.tabIndex = - 1;
 
       if (el.popupMenu) {
         el.popupMenu.close();
@@ -160,12 +159,12 @@ export default class AriaMenu {
     index = this.getIndexFirstChars(start, char);
 
     // If not found in remaining slots, check from beginning
-    if (-1 === index) {
+    if (- 1 === index) {
       index = this.getIndexFirstChars(0, char);
     }
 
     // If match was found...
-    if (-1 < index) {
+    if (- 1 < index) {
       this.setFocusToItem(this.menubarItems[index]);
     }
   }
