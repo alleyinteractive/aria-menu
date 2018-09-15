@@ -73,7 +73,7 @@ export default class AriaMenu {
     }
 
     // Use populated menuitems array to initialize firstItem and lastItem.
-    const menubarItems = this.menubarItems;
+    const { menubarItems } = this;
     if (0 < menubarItems.length) {
       [this.firstItem] = menubarItems;
       this.lastItem = menubarItems.pop();
