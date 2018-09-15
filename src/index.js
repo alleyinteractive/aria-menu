@@ -23,7 +23,7 @@ export default class AriaMenu {
     while (e) {
       const menubarItem = e.firstElementChild;
       if (e && menubarItem && 'A' !== menubarItem.tagName) {
-        throw new Error(`${msgPrefix}has child elements are not A elements.${menubarItem.tagName}`);
+        throw new Error(`${msgPrefix}has child elements are not A elements.${menubarItem.tagName}`); // eslint-disable-line max-len
       }
       e = e.nextElementSibling;
     }
