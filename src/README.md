@@ -1,6 +1,6 @@
-# Aria Menubar Component
+# Aria Menu keyboard navigation
 
-Allows a user to use the keyboard to navigate a three-level menu.
+Allows a user to use arrow keys to navigate a three-level menu.
 
 ## Background
 
@@ -8,23 +8,24 @@ These files are a direct adaptation of the [WAI Aria practices navigation menuba
 
 It has been modified from that example in the following ways:
 
-- All of the mouse (click and hover) events that were in the original example have been removed. This site applies its own click and hover events in `client/js/components/MegaMenu.js`
+- All of the mouse (click and hover) events that were in the original example have been removed.
 - All css styles and classes from the example have been removed in favor of letting the theme's stylesheets apply its own directives to `aria-expanded` and `aria-hidden` elements.
-- The code has been linted to adhere to this project's eslint standards.
+- The code has been updated to modern javascript standards.
 
 ## How to use
 
 At the top of your code:
 
 ```js
-import Menubar from '../lib/Menubar'; // or wherever
+import AriaMenu from 'aria-menu';
 ```
 
 Then in the body:
 
 ```js
-const menubar = new Menubar(this.element);
-menubar.init();
+const menuElement = document.querySelector('#id-of-list-element');
+const menu = new AriaMenu(menuElement);
+menu.init();
 ```
 
 

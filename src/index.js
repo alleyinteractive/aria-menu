@@ -4,7 +4,7 @@
 */
 import MenubarItem from './MenubarItem';
 
-export default class Menubar {
+export default class AriaMenu {
   constructor(domNode) {
     const msgPrefix = 'Menubar constructor argument menubarNode ';
 
