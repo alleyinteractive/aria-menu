@@ -6,6 +6,28 @@ import MenubarItem from './MenubarItem';
 
 export default class AriaMenu {
   constructor(domNode) {
+    AriaMenu.checkForErrors(domNode);
+
+    this.isMenubar = true;
+    this.domNode = domNode;
+
+    this.menubarItems = []; // See Menubar init method
+    this.firstChars = []; // See Menubar init method
+
+    this.firstItem = null; // See Menubar init method
+    this.lastItem = null; // See Menubar init method
+
+    this.hasFocus = false; // See MenubarItem handleFocus, handleBlur
+    this.hasHover = false; // See Menubar handleMouseover, handleMouseout
+  }
+
+  /**
+   * Checks that the element initialized is an Element, has descendant elements,
+   * an those elements include anchors.
+   *
+   * @param  {object} domNode Constructor argument.
+   */
+  static checkForErrors(domNode) {
     const msgPrefix = 'Menubar constructor argument menubarNode ';
 
     // Check whether menubarNode is a DOM element
@@ -27,18 +49,6 @@ export default class AriaMenu {
       }
       e = e.nextElementSibling;
     }
-
-    this.isMenubar = true;
-    this.domNode = domNode;
-
-    this.menubarItems = []; // See Menubar init method
-    this.firstChars = []; // See Menubar init method
-
-    this.firstItem = null; // See Menubar init method
-    this.lastItem = null; // See Menubar init method
-
-    this.hasFocus = false; // See MenubarItem handleFocus, handleBlur
-    this.hasHover = false; // See Menubar handleMouseover, handleMouseout
   }
 
   /*
