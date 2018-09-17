@@ -1,12 +1,10 @@
-/*
-*   This content is licensed according to the W3C Software License at
-*   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
-*/
-
 import MenuItem from './MenuItem';
 
+/**
+ * A MenubarItem consists of PopupMenus. These menus are the children of the
+ * first parent menu items.
+ */
 export default class PopupMenu {
-
   static setFocusToMenubarItem(controller, close) {
     let activeController = controller;
     while (activeController) {
@@ -25,11 +23,11 @@ export default class PopupMenu {
     return false;
   }
 
-  constructor(domNode, controllerObj) {
+  static checkForErrors(domNode) {
     const msgPrefix = 'PopupMenu constructor argument domNode ';
 
     // Check whether domNode is a DOM element
-    if (!(domNode instanceof Element)) {
+    if (! (domNode instanceof Element)) {
       throw new TypeError(`${msgPrefix}is not a DOM Element.`);
     }
     // Check whether domNode has child elements
@@ -41,11 +39,18 @@ export default class PopupMenu {
     while (childElement) {
       const menuitem = childElement.firstElementChild;
       if (menuitem && 'A' === menuitem) {
-        throw new Error(`${msgPrefix}has descendant elements that are not A elements.`);
+        throw new Error(
+          `${msgPrefix}has descendant elements that are not A elements.`
+        );
       }
       childElement = childElement.nextElementSibling;
     }
+  }
 
+  constructor(domNode, controllerObj) {
+    PopupMenu.checkForErrors(domNode);
+
+    // Set defaults
     this.isMenubar = false;
 
     this.domNode = domNode;
@@ -94,7 +99,7 @@ export default class PopupMenu {
     // Use populated menuitems array to initialize firstItem and lastItem.
     const numItems = this.menuitems.length;
     if (0 < numItems) {
-      this.firstItem = this.menuitems[0];
+      [this.firstItem] = this.menuitems;
       this.lastItem = this.menuitems[numItems - 1];
     }
   }
@@ -109,7 +114,7 @@ export default class PopupMenu {
       return;
     }
 
-    if (!this.controller.isMenubarItem) {
+    if (! this.controller.isMenubarItem) {
       this.controller.domNode.focus();
       this.close();
 
@@ -147,8 +152,8 @@ export default class PopupMenu {
       const prevItem = this.menuitems[index - 1];
 
       if (
-        prevItem &&
-        'none' === window.getComputedStyle(prevItem.domNode).display
+        prevItem
+        && 'none' === window.getComputedStyle(prevItem.domNode).display
       ) {
         // Skip this item if the user cannot see it
         this.setFocusToPreviousItem(prevItem);
@@ -168,8 +173,8 @@ export default class PopupMenu {
       const nextItem = this.menuitems[index + 1];
 
       if (
-        nextItem &&
-        'none' === window.getComputedStyle(nextItem.domNode).display
+        nextItem
+        && 'none' === window.getComputedStyle(nextItem.domNode).display
       ) {
         // Skip this item if the user cannot see it
         this.setFocusToNextItem(nextItem);
@@ -212,7 +217,7 @@ export default class PopupMenu {
    */
 
   open() {
-    if (!this.controller.isMenubarItem) {
+    if (! this.controller.isMenubarItem) {
       this.domNode.setAttribute('aria-hidden', true);
     } else {
       this.domNode.setAttribute('aria-hidden', false);
@@ -231,7 +236,7 @@ export default class PopupMenu {
       }
     });
 
-    if (force || !hasFocus) {
+    if (force || ! hasFocus) {
       this.domNode.setAttribute('aria-hidden', true);
       this.controller.setExpanded(false);
 
