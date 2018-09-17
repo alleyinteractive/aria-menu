@@ -6,6 +6,28 @@ import MenubarItem from './MenubarItem';
 
 export default class AriaMenu {
   constructor(domNode) {
+    AriaMenu.checkForErrors(domNode);
+
+    this.isMenubar = true;
+    this.domNode = domNode;
+
+    this.menubarItems = []; // See Menubar init method
+    this.firstChars = []; // See Menubar init method
+
+    this.firstItem = null; // See Menubar init method
+    this.lastItem = null; // See Menubar init method
+
+    this.hasFocus = false; // See MenubarItem handleFocus, handleBlur
+    this.hasHover = false; // See Menubar handleMouseover, handleMouseout
+  }
+
+  /**
+   * Checks that the element initialized is an Element, has descendant elements,
+   * an those elements include anchors.
+   *
+   * @param  {object} domNode Constructor argument.
+   */
+  static checkForErrors(domNode) {
     const msgPrefix = 'Menubar constructor argument menubarNode ';
 
     // Check whether menubarNode is a DOM element
@@ -23,22 +45,10 @@ export default class AriaMenu {
     while (e) {
       const menubarItem = e.firstElementChild;
       if (e && menubarItem && 'A' !== menubarItem.tagName) {
-        throw new Error(`${msgPrefix}has child elements are not A elements.${menubarItem.tagName}`);
+        throw new Error(`${msgPrefix}has child elements are not A elements.${menubarItem.tagName}`); // eslint-disable-line max-len
       }
       e = e.nextElementSibling;
     }
-
-    this.isMenubar = true;
-    this.domNode = domNode;
-
-    this.menubarItems = []; // See Menubar init method
-    this.firstChars = []; // See Menubar init method
-
-    this.firstItem = null; // See Menubar init method
-    this.lastItem = null; // See Menubar init method
-
-    this.hasFocus = false; // See MenubarItem handleFocus, handleBlur
-    this.hasHover = false; // See Menubar handleMouseover, handleMouseout
   }
 
   /*
@@ -73,11 +83,14 @@ export default class AriaMenu {
     }
 
     // Use populated menuitems array to initialize firstItem and lastItem.
-    const numItems = this.menubarItems.length;
-    if (0 < numItems) {
-      this.firstItem = this.menubarItems[0];
-      this.lastItem = this.menubarItems[numItems - 1];
+    const { menubarItems } = this;
+    if (0 < menubarItems.length) {
+      [this.firstItem] = menubarItems;
+      this.lastItem = menubarItems.pop();
     }
+
+    // Set the tabindex of the first item in the menu to 0.
+    // This will allow the keyboard user to tab over the meny.
     this.firstItem.domNode.tabIndex = 0;
   }
 

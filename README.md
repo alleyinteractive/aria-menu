@@ -28,4 +28,9 @@ const menu = new AriaMenu(menuElement);
 menu.init();
 ```
 
+In order for the visual changes to take place, you will need to add styles for `[aria-hidden="true"]` and `[aria-hidden="false"]` in your project's css.
 
+
+## Contributing to this plugin
+
+The original work is licensed [under the following license](https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document).
