@@ -1,6 +1,6 @@
 {
   "name": "aria-menu",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Makes site navigation menubars accessible following W3C design patterns.",
   "main": "lib/index.js",
   "scripts": {

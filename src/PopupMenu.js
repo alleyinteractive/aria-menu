@@ -217,18 +217,12 @@ export default class PopupMenu {
    */
 
   open() {
-    if (! this.controller.isMenubarItem) {
-      this.domNode.setAttribute('aria-hidden', true);
-    } else {
-      this.domNode.setAttribute('aria-hidden', false);
-    }
-
-    this.controller.setExpanded(true);
+    this.domNode.setAttribute('aria-hidden', false);
     document.body.classList.add('menu-open');
   }
 
   close(force) {
-    let hasFocus = this.hasFocus;
+    let { hasFocus } = this;
 
     this.menuitems.forEach((el) => {
       if (el.popupMenu) {
@@ -238,7 +232,6 @@ export default class PopupMenu {
 
     if (force || ! hasFocus) {
       this.domNode.setAttribute('aria-hidden', true);
-      this.controller.setExpanded(false);
 
       if (this.controller.isMenubarItem) {
         document.body.classList.remove('menu-open');

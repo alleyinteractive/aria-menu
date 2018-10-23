@@ -113,14 +113,6 @@ export default class MenubarItem {
     }
   }
 
-  setExpanded(value) {
-    if (value) {
-      this.domNode.setAttribute('aria-expanded', 'true');
-    } else {
-      this.domNode.setAttribute('aria-expanded', 'false');
-    }
-  }
-
   handleFocus() {
     this.menu.hasFocus = true;
   }
