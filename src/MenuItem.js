@@ -97,6 +97,7 @@ export default class MenuItem {
         flag = true;
         break;
 
+      case this.keyCode.ESC:
       case this.keyCode.LEFT:
         this.menu.setFocusToController('previous', true);
         this.menu.close(true);
@@ -123,12 +124,6 @@ export default class MenuItem {
       case this.keyCode.END:
       case this.keyCode.PAGEDOWN:
         this.menu.setFocusToLastItem();
-        flag = true;
-        break;
-
-      case this.keyCode.ESC:
-        this.menu.setFocusToController();
-        this.menu.close(true);
         flag = true;
         break;
 
